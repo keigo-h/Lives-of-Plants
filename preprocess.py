@@ -10,11 +10,10 @@ class Preprocess:
         pass
 
     def get_and_process(self):
-        # TODO: get the data and preprocess it here
-        # TODO: return X0, L0 training data and labels
-        # TODO: return X1, L1 testing data and labels
         train_ds, val_ds = get()
         normalization_layer = tf.keras.layers.Rescaling(1./255)
+        augment_fn = tf.keras.Sequential([tf.keras.layers.RandomFlip(mode="horizontal"),tf.keras.layers.RandomRotation(factor=0.1)])
         normalized_train_ds = train_ds.map(lambda x,y: (normalization_layer(x), y))
+        normalized_train_ds_augment=normalized_train_ds.map(lambda x,y: (augment_fn(x), y))
         normalized_val_ds = val_ds.map(lambda x,y: (normalization_layer(x), y))
-        return normalized_train_ds, normalized_val_ds
+        return normalized_train_ds_augment, normalized_val_ds
