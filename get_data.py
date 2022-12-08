@@ -8,14 +8,15 @@ import tensorflow as tf
 def get():
 
     batch_size = 3
-    img_height = 180
-    img_width = 180
+    img_height = 256
+    img_width = 256
 
     data_dir = "dataset"
 
     train_ds = tf.keras.utils.image_dataset_from_directory(
     data_dir,
     labels = 'inferred',
+    label_mode='categorical',
     validation_split=0.2,
     subset="training",
     seed=123,
@@ -27,6 +28,7 @@ def get():
     val_ds = tf.keras.utils.image_dataset_from_directory(
     data_dir,
     labels = 'inferred',
+    label_mode='categorical',
     validation_split=0.2,
     subset="validation",
     seed=123,
