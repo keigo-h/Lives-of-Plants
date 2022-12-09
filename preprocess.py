@@ -5,7 +5,9 @@ import keras_preprocessing
 import tensorflow_datasets as tfds
 from get_data import get
 import matplotlib.pyplot as plt
-
+"""
+Class which handles preprocessing data
+"""
 class Preprocess:
     def __init__(self):
         pass
@@ -17,5 +19,4 @@ class Preprocess:
         normalized_train_ds = train_ds.map(lambda x,y: (normalization_layer(x), y))
         normalized_train_ds_augment=normalized_train_ds.map(lambda x,y: (augment_fn(x), y))
         normalized_val_ds = val_ds.map(lambda x,y: (normalization_layer(x), y))
-        image_batch, label_batch = normalized_val_ds.as_numpy_iterator().next()
         return normalized_train_ds_augment, normalized_val_ds

@@ -6,7 +6,9 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt
 import numpy as np
-
+"""
+File which takes data and stores it in a tfds
+"""
 def get(label_mode='categorical', img_height=256, img_width=256, batch_size=3):
 
     batch_size = batch_size

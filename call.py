@@ -3,7 +3,9 @@ import tensorflow as tf
 import keras
 from preprocess import Preprocess
 from model import Plant_Model,Plant_Model_Transfer, Plant_Model_Two, Test_Model
-
+"""
+file which calls the models
+"""
 def main():
     preprocess = Preprocess()
     model_1 = Plant_Model()

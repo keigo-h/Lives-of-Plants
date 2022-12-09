@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow_datasets as tfds
 
+"""
+Class representing the final model
+"""
 class Plant_Model(tf.keras.Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -46,24 +49,27 @@ class Plant_Model(tf.keras.Model):
             validation_data= val_ds
         )
         
-        # plt.plot(history.history['accuracy'])
-        # plt.plot(history.history['val_accuracy'])
-        # plt.title('Model 1 Accuracy')
-        # plt.ylabel('accuracy')
-        # plt.xlabel('epoch')
-        # plt.legend(['training', 'validation'], loc='upper left')
-        # plt.savefig('accuracy.png')
-        # plt.show()
-        # plt.plot(history.history['loss'])
-        # plt.plot(history.history['val_loss'])
-        # plt.title('Model 1 Loss')
-        # plt.ylabel('loss')
-        # plt.xlabel('epoch')
-        # plt.legend(['training', 'validation'], loc='upper right')
-        # plt.savefig('loss.png')
-        # plt.show()
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Model 1 Accuracy')
+        plt.ylabel('accuracy')
+        plt.xlabel('epoch')
+        plt.legend(['training', 'validation'], loc='upper left')
+        plt.savefig('accuracy.png')
+        plt.show()
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('Model 1 Loss')
+        plt.ylabel('loss')
+        plt.xlabel('epoch')
+        plt.legend(['training', 'validation'], loc='upper right')
+        plt.savefig('loss.png')
+        plt.show()
         return history.history['val_accuracy'][-1]
 
+"""
+Class representing another model that perfromed relatively well
+"""
 class Plant_Model_Two(tf.keras.Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -121,7 +127,9 @@ class Plant_Model_Two(tf.keras.Model):
         plt.show()
         return history.history['val_accuracy'][-1]
 
-
+"""
+Class representing an experimental Transfer learning model
+"""
 class Plant_Model_Transfer(tf.keras.Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -170,9 +178,9 @@ class Plant_Model_Transfer(tf.keras.Model):
         plt.show()
         return history.history['val_accuracy'][-1]
 
-
-
-
+"""
+A class used to test and experiment
+"""
 class Test_Model(tf.keras.Model):
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -209,18 +217,16 @@ class Test_Model(tf.keras.Model):
         
         history = model.fit(
             train_ds,
-            epochs = 75,
+            epochs = 10,
             validation_data= val_ds
         )
         image_batch, label_batch = val_ds.as_numpy_iterator().next()
         predictions = model.predict_on_batch(image_batch)
 
-        # print('Predictions:\n', predictions)
         print('Labels:\n', label_batch)
 
         class_names = ['acer macrophyllum', 'arnica', 'lewisia', 'lupinus latifolius', 'salal', 'salmonberry', 'trillium', 'vine maple', 'western pasqueflower', 'western red cedar']
 
-        # .numpy().astype("uint8")
         print(predictions[0])
         print(np.argmax(predictions[0]))
         print(class_names[np.argmax(predictions[0])])
@@ -248,20 +254,4 @@ class Test_Model(tf.keras.Model):
         plt.show()
         plt.savefig("temp_img3.png")
         
-        # plt.plot(history.history['accuracy'])
-        # plt.plot(history.history['val_accuracy'])
-        # plt.title('Model 1 Accuracy')
-        # plt.ylabel('accuracy')
-        # plt.xlabel('epoch')
-        # plt.legend(['training', 'validation'], loc='upper left')
-        # plt.savefig('accuracy.png')
-        # plt.show()
-        # plt.plot(history.history['loss'])
-        # plt.plot(history.history['val_loss'])
-        # plt.title('Model 1 Loss')
-        # plt.ylabel('loss')
-        # plt.xlabel('epoch')
-        # plt.legend(['training', 'validation'], loc='upper right')
-        # plt.savefig('loss.png')
-        # plt.show()
         return history.history['val_accuracy'][-1]
